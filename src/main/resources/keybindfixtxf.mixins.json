@@ -1,0 +1,12 @@
+{
+  "required": true,
+  "package": "com.jahirtrap.keybindfix.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "client": [
+    "KeyMappingAccessor",
+    "KeyMappingMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

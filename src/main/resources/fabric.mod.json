@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "id": "${mod_id}",
+  "version": "${mod_version}",
+  "name": "${mod_name}",
+  "description": "${mod_description}",
+  "authors": [
+    "${mod_author}"
+  ],
+  "contributors": [
+    "fzzyhmstrs"
+  ],
+  "contact": {
+    "homepage": "${mod_url}"
+  },
+  "license": "${mod_license}",
+  "icon": "logo.png",
+  "environment": "${side}",
+  "mixins": [
+    "${mod_id}.mixins.json"
+  ],
+  "custom": {
+    "modmenu": {
+      "badges": [ "library" ]
+    }
+  }
+}
