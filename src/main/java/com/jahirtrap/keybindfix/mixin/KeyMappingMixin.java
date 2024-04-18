@@ -26,12 +26,12 @@ public abstract class KeyMappingMixin {
     @Unique
     private static final Multimap<InputConstants.Key, KeyMapping> KEY_FIX_MAP = ArrayListMultimap.create();
 
-    @Inject(method = "click", at = @At(value = "HEAD"))
+    @Inject(method = "click", at = @At(value = "TAIL"))
     private static void clickFixed(InputConstants.Key key, CallbackInfo ci) {
         KEY_FIX_MAP.get(key).forEach(it -> ((KeyMappingAccessor) it).setClickCount(((KeyMappingAccessor) it).getClickCount() + 1));
     }
 
-    @Inject(method = "set", at = @At(value = "HEAD"))
+    @Inject(method = "set", at = @At(value = "TAIL"))
     private static void setFixed(InputConstants.Key key, boolean bl, CallbackInfo ci) {
         KEY_FIX_MAP.get(key).forEach(it -> it.setDown(bl));
     }
@@ -40,8 +40,8 @@ public abstract class KeyMappingMixin {
     private static void setAllToMultiMap(CallbackInfo ci) {
         KEY_FIX_MAP.clear();
         for (KeyMapping keyMapping : ALL.values()) {
-            for (KeyMapping keyMapping2 : KEY_MAP.values()) {
-                if (((KeyMappingAccessor) keyMapping).getKey() == ((KeyMappingAccessor) keyMapping2).getKey())
+            for (KeyMapping inputKey : KEY_MAP.values()) {
+                if (((KeyMappingAccessor) keyMapping).getKey() == ((KeyMappingAccessor) inputKey).getKey())
                     KEY_FIX_MAP.put(((KeyMappingAccessor) keyMapping).getKey(), keyMapping);
             }
         }
