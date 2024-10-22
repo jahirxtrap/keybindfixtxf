@@ -43,8 +43,6 @@ def replaceProperties = [
 
 processResources {
     inputs.properties replaceProperties
-    replaceProperties.put 'project', project
-
     filesMatching(resourceTargets) {
         expand replaceProperties
     }
@@ -71,7 +69,6 @@ jar {
 
 tasks.withType(JavaCompile).configureEach {
     it.options.encoding = 'UTF-8'
-    it.options.getRelease().set(17)
 }
 
 tasks.withType(GenerateModuleMetadata) {
