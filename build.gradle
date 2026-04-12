@@ -2,6 +2,9 @@ plugins {
     id 'java'
     id 'idea'
     id 'fabric-loom' version '1.5-SNAPSHOT'
+    id 'maven-publish'
+    id 'me.modmuss50.mod-publish-plugin' version '0.6.3'
+    id 'signing'
 }
 
 version = "${version}"
@@ -48,7 +51,11 @@ processResources {
     }
 }
 
-java.toolchain.languageVersion = JavaLanguageVersion.of(17)
+java {
+    toolchain.languageVersion = JavaLanguageVersion.of(17)
+    withSourcesJar()
+    withJavadocJar()
+}
 
 jar {
     manifest {
@@ -76,3 +83,65 @@ tasks.withType(GenerateModuleMetadata) {
 }
 
 jar.finalizedBy('remapJar')
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            groupId = 'io.github.jahirxtrap'
+            artifactId = mod_id
+            from components.java
+
+            pom {
+                name = mod_name
+                description = mod_description
+                url = mod_url
+                licenses {
+                    license {
+                        name = 'MIT License'
+                        url = 'https://opensource.org/licenses/MIT'
+                    }
+                }
+                developers {
+                    developer {
+                        id = 'jahirxtrap'
+                        name = 'jahirtrap'
+                    }
+                }
+                scm {
+                    connection = 'scm:git:git://github.com/jahirxtrap/keybindfixtxf.git'
+                    developerConnection = 'scm:git:ssh://github.com/jahirxtrap/keybindfixtxf.git'
+                    url = mod_url
+                }
+            }
+        }
+    }
+    repositories {
+        maven {
+            name = 'staging'
+            url = "${layout.buildDirectory.get()}/staging-deploy"
+        }
+    }
+}
+
+signing {
+    def signingKey = System.getenv("GPG_PRIVATE_KEY")
+    def signingPassword = System.getenv("GPG_PASSPHRASE")
+    if (signingKey) {
+        useInMemoryPgpKeys(signingKey, signingPassword)
+        sign publishing.publications.mavenJava
+    }
+}
+
+publishMods {
+    file = tasks.remapJar.archiveFile
+    displayName = version
+    type = STABLE
+    changelog = file("CHANGELOG.md").text
+
+    github {
+        accessToken = System.getenv("GITHUB_TOKEN")
+        repository = "jahirxtrap/keybindfixtxf"
+        commitish = "master"
+        tagName = version
+    }
+}
