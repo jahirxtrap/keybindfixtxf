@@ -1,5 +1,5 @@
 <h2><strong>Keybind Fix TXF</strong></h2>
-<p><a href="https://central.sonatype.com/artifact/io.github.jahirxtrap/keybindfixtxf"><img src="https://img.shields.io/maven-central/v/io.github.jahirxtrap/keybindfixtxf?style=flat" alt="Maven Central" /></a></p>
+<p><a href="https://central.sonatype.com/artifact/io.github.jahirxtrap/keybindfixtxf"><img src="https://img.shields.io/maven-central/v/io.github.jahirxtrap/keybindfixtxf?style=flat" alt="Maven Central" /></a> <a href="https://deepwiki.com/jahirxtrap/keybindfixtxf"><img src="https://deepwiki.com/badge.svg" alt="Ask DeepWiki" /></a></p>
 
 Fix keybinding conflict. Available for **1.18 to 1.21.8** (fixed in later versions).
 
