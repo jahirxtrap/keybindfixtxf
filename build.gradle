@@ -141,7 +141,7 @@ publishMods {
     github {
         accessToken = System.getenv("GITHUB_TOKEN")
         repository = "jahirxtrap/keybindfixtxf"
-        commitish = "master"
+        commitish = 'git branch --show-current'.execute().text.trim()
         tagName = version
     }
 }
