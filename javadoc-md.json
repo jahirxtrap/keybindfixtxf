@@ -1,0 +1,11 @@
+{
+  "classes": [
+    {
+      "name": "KeybindFixer",
+      "order": 1,
+      "paths": {
+        "fabric": "src/main/java/com/jahirtrap/keybindfix/KeybindFixer.java"
+      }
+    }
+  ]
+}
