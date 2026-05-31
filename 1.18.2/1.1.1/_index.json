@@ -1,0 +1,16 @@
+{
+  "title": "Keybind Fix TXF",
+  "mcVersion": "1.18.2",
+  "modVersion": "1.1.1",
+  "generatedAt": "2026-05-31T05:33:46.666Z",
+  "classes": [
+    {
+      "name": "KeybindFixer",
+      "order": 1,
+      "scope": "per-loader",
+      "loaders": [
+        "fabric"
+      ]
+    }
+  ]
+}
